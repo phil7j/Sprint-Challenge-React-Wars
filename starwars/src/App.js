@@ -2,6 +2,13 @@ import React, {useState, useEffect} from 'react';
 import './App.css';
 import CharacterList from './components/CharacterList'
 import Header from './components/Header'
+import { DotLoader } from 'react-spinners';
+import styled from 'styled-components'
+
+const Centered = styled.div`
+display: flex;
+justify-content: center;
+`
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -41,7 +48,16 @@ const App = () => {
   return (
     <div className="App">
       <Header getCharacters={getCharacters} nextPage={nextPage} prevPage={prevPage} />
-      {!data[0] ? <h2>Loading...</h2> : <CharacterList data={data} /> }
+      {!data[0] ? <Centered>
+                    <DotLoader
+                      // css={override}
+                      sizeUnit={"px"}
+                      size={150}
+                      color={'black'}
+                      loading={!data[0]}
+                    />
+                  </Centered>
+         : <CharacterList data={data} /> }
 
     </div>
   );
